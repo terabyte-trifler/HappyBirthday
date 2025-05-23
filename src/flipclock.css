@@ -1,0 +1,91 @@
+.countdown-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: white;
+  margin-bottom: 1rem;
+  margin-top: -70px;
+  text-align: center;
+  font-family: 'Orbitron', sans-serif;
+}
+
+.countdown {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  transform: translateY(-20px);
+  margin-top: 2rem;
+}
+
+.flip-unit {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: 'Orbitron', sans-serif;
+}
+
+.flip-card {
+  background: linear-gradient(to bottom, #2a2a2a, #1a1a1a);
+  color: #e0e0e0;
+  font-size: 4rem;
+  width: 120px;
+  height: 140px;
+  border-radius: 10px;
+  box-shadow: inset 0 -2px 0 #000, inset 0 2px 0 #444;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-shadow: 0 1px 0 #000;
+}
+
+.flip-card .top,
+.flip-card .bottom {
+  position: absolute;
+  width: 100%;
+  text-align: center;
+  line-height: 140px;
+  z-index: 1;
+}
+
+.flip-card::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.2);
+  z-index: 2;
+  transform: translateY(-1px);
+}
+
+.flip-label {
+  margin-top: 12px;
+  font-size: 1rem;
+  color: #facc15;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.title {
+  font-size: 3rem;
+  font-weight: bold;
+  margin-bottom: 2rem;
+  color: #facc15;
+  text-align: center;
+  font-family: 'Orbitron', sans-serif;
+}
+
+@media (max-width: 768px) {
+  .flip-card {
+    font-size: 2.5rem;
+    width: 100px;
+    height: 110px;
+  }
+
+  .flip-label {
+    font-size: 0.8rem;
+  }
+} 
