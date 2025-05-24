@@ -4,10 +4,30 @@ import './hero.css';
 import './flipclock.css';
 import './balloons.css';
 import './ScrollArrow.css';
+import './ImageSliderPage.css';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import 'react-lazy-load-image-component/src/effects/blur.css';
 
-const colors = ['yellow', 'green', 'blue', 'red', 'purple'];
+const slides = [
+  {
+    id: 1,
+    img: 'https://pub-3067eb012cf34f2bb7662d7f11dc9a25.r2.dev/ChatGPT%20Image%20Apr%204%2C%202025%2C%2001_11_13%20PM.png',
+    title: 'Memory One',
+    description: 'An amazing day full of joy and laughter.'
+  },
+  {
+    id: 2,
+    img: 'https://example.com/photo2.jpg',
+    title: 'Memory Two',
+    description: 'We walked through the old city streets like locals.'
+  },
+  {
+    id: 3,
+    img: 'https://example.com/photo3.jpg',
+    title: 'Memory Three',
+    description: 'Captured moments at the beach during sunset.'
+  }
+];
 
 const FlipUnit = ({ label, value }) => (
   <div className="flip-unit">
@@ -23,9 +43,11 @@ function App() {
   const [time, setTime] = useState({ days: '00', hours: '00', minutes: '00', seconds: '00' });
   const [balloons, setBalloons] = useState([]);
   const [showBalloons, setShowBalloons] = useState(false);
+  const [current, setCurrent] = useState(0);
+  const colors = ['yellow', 'green', 'blue', 'red', 'purple'];
 
   useEffect(() => {
-    const target = new Date("2025-05-23T22:25:00").getTime();
+    const target = new Date("2025-07-07T22:25:00").getTime();
     const interval = setInterval(() => {
       const now = new Date().getTime();
       let distance = target - now;
@@ -68,6 +90,9 @@ function App() {
     return () => clearInterval(interval);
   }, [showBalloons]);
 
+  const nextSlide = () => setCurrent((current + 1) % slides.length);
+  const prevSlide = () => setCurrent((current - 1 + slides.length) % slides.length);
+
   return (
     <>
       <LazyLoadImage
@@ -79,7 +104,6 @@ function App() {
 
       <div className="hero">
         <div className="overlay"></div>
-
         <div className="absolute top-0 left-0 w-full h-full z-10 pointer-events-none">
           {balloons.map(b => (
             <div
@@ -109,16 +133,25 @@ function App() {
         </div>
 
         <a href="#section2" className="scroll-down" aria-label="Scroll to next section">
-          <span></span>
-          <span></span>
-          <span></span>
+          <span></span><span></span><span></span>
         </a>
       </div>
 
-      <section id="section2" className="hero">
-        <div className="overlay"></div>
-        <div className="content">
-          <h2 style={{ fontSize: '2rem' }}>Another section using the same background</h2>
+      <section id="section2" className="slider-container">
+        <div className="slider-image">
+          <img src={slides[current].img} alt={slides[current].title} />
+        </div>
+        <div className="slider-content">
+          <h2>{slides[current].title}</h2>
+          <p>{slides[current].description}</p>
+          <div className="slider-controls">
+            <button onClick={prevSlide} aria-label="Previous slide">
+              &#x276E;
+            </button>
+            <button onClick={nextSlide} aria-label="Next slide">
+              &#x276F;
+            </button>
+          </div>
         </div>
       </section>
     </>
