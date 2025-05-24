@@ -178,7 +178,7 @@ function App() {
     const startAutoplay = () => {
       autoplayRef.current = setInterval(() => {
         setCurrent(prev => (prev + 1) % slides.length);
-      }, 7000);
+      }, 8000);
     };
   
     if (!isHovered) {
@@ -255,14 +255,6 @@ function App() {
         <div className="slider-content">
           <h2>{slides[current].title}</h2>
           <p>{slides[current].description}</p>
-          <div className="slider-controls">
-            <button onClick={prevSlide} aria-label="Previous slide">
-              &#x276E;
-            </button>
-            <button onClick={nextSlide} aria-label="Next slide">
-              &#x276F;
-            </button>
-          </div>
         </div>
       </section>
     </>
