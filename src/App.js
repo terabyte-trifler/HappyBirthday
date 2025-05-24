@@ -12,12 +12,12 @@ const slides = [
   {
     id: 1,
     img: 'https://pub-3067eb012cf34f2bb7662d7f11dc9a25.r2.dev/ChatGPT%20Image%20Apr%204%2C%202025%2C%2001_11_13%20PM.png',
-    title: 'Memory One',
+    title: 'The first day',
     description: 'An amazing day full of joy and laughter.'
   },
   {
     id: 2,
-    img: 'https://example.com/photo2.jpg',
+    img: 'https://pub-3067eb012cf34f2bb7662d7f11dc9a25.r2.dev/WhatsApp%20Image%202025-03-10%20at%2019.56.55%20(1).jpeg',
     title: 'Memory Two',
     description: 'We walked through the old city streets like locals.'
   },
@@ -90,8 +90,13 @@ function App() {
     return () => clearInterval(interval);
   }, [showBalloons]);
 
-  const nextSlide = () => setCurrent((current + 1) % slides.length);
-  const prevSlide = () => setCurrent((current - 1 + slides.length) % slides.length);
+  const nextSlide = () => {
+    setCurrent(prev => (prev + 1) % slides.length);
+  };
+
+  const prevSlide = () => {
+    setCurrent(prev => (prev - 1 + slides.length) % slides.length);
+  };
 
   return (
     <>
