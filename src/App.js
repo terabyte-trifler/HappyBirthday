@@ -46,7 +46,7 @@ function App() {
   const [current, setCurrent] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
   const colors = ['yellow', 'green', 'blue', 'red', 'purple'];
-  const autoplayRef = useRef();
+  const autoplayRef = useRef(null);
 
   useEffect(() => {
     const target = new Date("2025-07-07T22:25:00").getTime();
@@ -92,16 +92,25 @@ function App() {
     return () => clearInterval(interval);
   }, [showBalloons]);
 
-  const nextSlide = () => setCurrent((prev) => (prev + 1) % slides.length);
-  const prevSlide = () => setCurrent((prev) => (prev - 1 + slides.length) % slides.length);
-
   useEffect(() => {
-    autoplayRef.current = setInterval(() => {
-      if (!isHovered) setCurrent(prev => (prev + 1) % slides.length);
-    }, 4000);
-
+    if (autoplayRef.current) clearInterval(autoplayRef.current);
+    if (!isHovered) {
+      autoplayRef.current = setInterval(() => {
+        setCurrent(prev => (prev + 1) % slides.length);
+      }, 4000);
+    }
     return () => clearInterval(autoplayRef.current);
   }, [isHovered]);
+
+  const nextSlide = () => {
+    clearInterval(autoplayRef.current);
+    setCurrent((prev) => (prev + 1) % slides.length);
+  };
+
+  const prevSlide = () => {
+    clearInterval(autoplayRef.current);
+    setCurrent((prev) => (prev - 1 + slides.length) % slides.length);
+  };
 
   return (
     <>
@@ -160,16 +169,10 @@ function App() {
           <h2>{slides[current].title}</h2>
           <p>{slides[current].description}</p>
           <div className="slider-controls">
-            <button onClick={() => {
-              clearInterval(autoplayRef.current);
-              prevSlide();
-            }} aria-label="Previous slide">
+            <button onClick={prevSlide} aria-label="Previous slide">
               &#x276E;
             </button>
-            <button onClick={() => {
-              clearInterval(autoplayRef.current);
-              nextSlide();
-            }} aria-label="Next slide">
+            <button onClick={nextSlide} aria-label="Next slide">
               &#x276F;
             </button>
           </div>

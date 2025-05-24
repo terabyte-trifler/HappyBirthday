@@ -19,6 +19,24 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    position: relative;
+    transition: opacity 0.8s ease-in-out;
+    opacity: 1;
+  }
+  
+  .slider-image.fade {
+    animation: fadeIn 0.8s ease-in-out;
+  }
+  
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+      transform: scale(0.98);
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
   }
   
   .slider-image img {
@@ -28,7 +46,7 @@
     height: auto;
     object-fit: contain;
     border-radius: 12px;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
   }
   
   .slider-content {
@@ -99,10 +117,5 @@
     .slider-content p {
       font-size: 1.1rem;
     }
-  }
-  
-  .slider-image.fade img {
-    transition: opacity 0.5s ease-in-out;
-    opacity: 1;
   }
   
