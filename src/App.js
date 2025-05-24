@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import './App.css';
 import './hero.css';
 import './flipclock.css';
@@ -44,7 +44,9 @@ function App() {
   const [balloons, setBalloons] = useState([]);
   const [showBalloons, setShowBalloons] = useState(false);
   const [current, setCurrent] = useState(0);
+  const [isHovered, setIsHovered] = useState(false);
   const colors = ['yellow', 'green', 'blue', 'red', 'purple'];
+  const autoplayRef = useRef();
 
   useEffect(() => {
     const target = new Date("2025-07-07T22:25:00").getTime();
@@ -90,13 +92,16 @@ function App() {
     return () => clearInterval(interval);
   }, [showBalloons]);
 
-  const nextSlide = () => {
-    setCurrent(prev => (prev + 1) % slides.length);
-  };
+  const nextSlide = () => setCurrent((prev) => (prev + 1) % slides.length);
+  const prevSlide = () => setCurrent((prev) => (prev - 1 + slides.length) % slides.length);
 
-  const prevSlide = () => {
-    setCurrent(prev => (prev - 1 + slides.length) % slides.length);
-  };
+  useEffect(() => {
+    autoplayRef.current = setInterval(() => {
+      if (!isHovered) setCurrent(prev => (prev + 1) % slides.length);
+    }, 4000);
+
+    return () => clearInterval(autoplayRef.current);
+  }, [isHovered]);
 
   return (
     <>
@@ -142,18 +147,29 @@ function App() {
         </a>
       </div>
 
-      <section id="section2" className="slider-container">
-        <div className="slider-image">
+      <section
+        id="section2"
+        className="slider-container"
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+      >
+        <div className="slider-image fade">
           <img src={slides[current].img} alt={slides[current].title} />
         </div>
         <div className="slider-content">
           <h2>{slides[current].title}</h2>
           <p>{slides[current].description}</p>
           <div className="slider-controls">
-            <button onClick={prevSlide} aria-label="Previous slide">
+            <button onClick={() => {
+              clearInterval(autoplayRef.current);
+              prevSlide();
+            }} aria-label="Previous slide">
               &#x276E;
             </button>
-            <button onClick={nextSlide} aria-label="Next slide">
+            <button onClick={() => {
+              clearInterval(autoplayRef.current);
+              nextSlide();
+            }} aria-label="Next slide">
               &#x276F;
             </button>
           </div>
