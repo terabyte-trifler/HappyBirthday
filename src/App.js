@@ -11,22 +11,104 @@ import 'react-lazy-load-image-component/src/effects/blur.css';
 const slides = [
   {
     id: 1,
-    img: 'https://pub-3067eb012cf34f2bb7662d7f11dc9a25.r2.dev/ChatGPT%20Image%20Apr%204%2C%202025%2C%2001_11_13%20PM.png',
-    title: 'The first day',
-    description: 'An amazing day full of joy and laughter.'
+    img: 'https://pub-3067eb012cf34f2bb7662d7f11dc9a25.r2.dev/1.HEIC',
+    title: 'Where it all started',
+    description: 'First photo of you in my phone -- that walk, that laugh -- yaad aaya kuch?'
   },
   {
     id: 2,
-    img: 'https://pub-3067eb012cf34f2bb7662d7f11dc9a25.r2.dev/WhatsApp%20Image%202025-03-10%20at%2019.56.55%20(1).jpeg',
-    title: 'Memory Two',
-    description: 'We walked through the old city streets like locals.'
+    img: 'https://pub-3067eb012cf34f2bb7662d7f11dc9a25.r2.dev/ChatGPT%20Image%20Apr%204%2C%202025%2C%2001_11_13%20PM.png',
+    title: 'The First Hug',
+    description: 'We hugged there — same spot where you park. Felt like time parked too.'
   },
   {
     id: 3,
-    img: 'https://example.com/photo3.jpg',
-    title: 'Memory Three',
-    description: 'Captured moments at the beach during sunset.'
+    img: 'https://pub-3067eb012cf34f2bb7662d7f11dc9a25.r2.dev/FD63F76C-D23F-4760-B019-AC3FED499B1A.jpg',
+    title: 'The OG one',
+    description: 'Play (Sohne Lagde by Sidhu Moosewala) Ab to aaya hoga Yaad :D'
   }
+  ,
+  {
+    id: 4,
+    img: 'https://pub-3067eb012cf34f2bb7662d7f11dc9a25.r2.dev/IMG_5323.PNG',
+    title: 'The Geek Mode',
+    description: 'Tu specs mein zyada achi lagti h tbh'
+  }
+  ,
+  {
+    id: 4,
+    img: 'https://pub-3067eb012cf34f2bb7662d7f11dc9a25.r2.dev/IMG_5367.HEIC',
+    title: 'The First Kiss',
+    description: 'First time we kissed aisa laga tu khaa hi jayegi mujhe :D. Lol it went for 40 min ig '
+  },
+  {
+    id: 5,
+    img: 'https://pub-3067eb012cf34f2bb7662d7f11dc9a25.r2.dev/IMG_5345.HEIC',
+    title: 'Expressions.exe',
+    description: 'Tu aur tere expressions — full drama pack.'
+  },
+  {
+    id: 6,
+    img: 'https://pub-3067eb012cf34f2bb7662d7f11dc9a25.r2.dev/IMG_5360.HEIC',
+    title: 'Glowmates',
+    description: 'We chase light — morning to dusk. I just dont chase shade Okay ?'
+  },
+  {
+    id: 7,
+    img: 'https://pub-3067eb012cf34f2bb7662d7f11dc9a25.r2.dev/IMG_5398.jpg',
+    title: 'My fav ❤️',
+    description: 'If I had to frame just one — this.'
+  },
+  {
+    id: 7,
+    img: 'https://pub-3067eb012cf34f2bb7662d7f11dc9a25.r2.dev/IMG-20250121-WA0015.jpg',
+    title: 'Laddoo Phase',
+    description: 'Bachpan mein cute thi, ab toh... danger zone 😏'
+  },
+
+  {
+    id: 8,
+    img: 'https://pub-3067eb012cf34f2bb7662d7f11dc9a25.r2.dev/IMG-20250425-WA0021(1).jpg',
+    title: 'Tiny Trouble',
+    description: 'Wisdom baby edition: Bachpan mein hi itni cunning thi… ab toh kya hi kehna 😏'
+  },
+
+
+  {
+    id: 9,
+    img: 'https://pub-3067eb012cf34f2bb7662d7f11dc9a25.r2.dev/IMG_0763.HEIC',
+    title: 'Waiting Game',
+    description: 'Bas kar yaar… aur kitna wait karwayegi? Aaja ab. Ek hug 🤗 toh dede'
+  },
+
+  {
+    id: 10,
+    img: 'https://pub-3067eb012cf34f2bb7662d7f11dc9a25.r2.dev/ChatGPT%20Image%20Apr%204%2C%202025%2C%2005_10_21%20PM.png',
+    title: 'Dr. Sahab',
+    description: 'Yaar jab mai tere college aaya tha… tune mere teeth clean kiye the. Best day tha — of course, tere liye nahi… mere daant saaf ho gaye 😭🪥😂'
+  },
+
+  {
+    id: 11,
+    img: 'https://pub-3067eb012cf34f2bb7662d7f11dc9a25.r2.dev/IMG_0868.JPG',
+    title: 'Good Morning!',
+    description: 'Kabhi good morning aata tha — photo attached. Ab toh silence hi deliver hoti hai'
+  },
+ 
+  {
+    id: 12,
+    img: 'https://pub-3067eb012cf34f2bb7662d7f11dc9a25.r2.dev/IMG_0839.HEIC',
+    title: 'Sunlight on your lips',
+    description: 'You smiled there. I’ve been returning to that moment ever since.'
+  },
+
+  {
+    id: 13,
+    img: 'https://pub-3067eb012cf34f2bb7662d7f11dc9a25.r2.dev/IMG_0906%20(1).HEIC',
+    title: 'n The last one',
+    description: 'Kamla Nehru Park is peace. But that one Omkareshwar— that’s etched forever.'
+  },
+
 ];
 
 const FlipUnit = ({ label, value }) => (
@@ -93,14 +175,19 @@ function App() {
   }, [showBalloons]);
 
   useEffect(() => {
-    if (autoplayRef.current) clearInterval(autoplayRef.current);
-    if (!isHovered) {
+    const startAutoplay = () => {
       autoplayRef.current = setInterval(() => {
         setCurrent(prev => (prev + 1) % slides.length);
-      }, 4000);
+      }, 7000);
+    };
+  
+    if (!isHovered) {
+      startAutoplay();
     }
+  
     return () => clearInterval(autoplayRef.current);
   }, [isHovered]);
+  
 
   const nextSlide = () => {
     clearInterval(autoplayRef.current);

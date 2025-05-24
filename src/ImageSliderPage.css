@@ -70,14 +70,14 @@
     color: #ddd;
   }
   
-  .slider-controls {
+  /*.slider-controls {
     display: flex;
     justify-content: center;
     gap: 1.5rem;
     margin-top: 2rem;
   }
-  
-  .slider-controls button {
+  */
+  /*.slider-controls button {
     background-color: transparent;
     border: 2px solid white;
     color: white;
@@ -98,7 +98,7 @@
     background-color: white;
     color: black;
     border-color: white;
-  }
+  }*/
   
   @media (max-width: 768px) {
     .slider-container {
