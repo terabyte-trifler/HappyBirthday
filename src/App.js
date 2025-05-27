@@ -131,7 +131,7 @@ function App() {
   const autoplayRef = useRef(null);
 
   useEffect(() => {
-    const target = new Date("2025-07-07T22:25:00").getTime();
+    const target = new Date("2025-07-07T00:00:00").getTime();
     const interval = setInterval(() => {
       const now = new Date().getTime();
       let distance = target - now;
